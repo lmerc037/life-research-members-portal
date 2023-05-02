@@ -1,3 +1,7 @@
+// This component is a form component to register a new supervision
+// When the form is submitted, it will call the `registerSupervision` service to register the new supervision
+// When the service returns successfully, the form will be reset
+
 import { Button, Col, DatePicker, Row } from "antd";
 import Select from "antd/lib/select";
 import Form from "antd/lib/form";

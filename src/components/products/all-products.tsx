@@ -1,3 +1,7 @@
+// This is a component that displays a table of products , with filters to filter the products based on their title, types, authors.
+// The component also has buttons ta add a new product and clear the filters.
+// The component also updates the URL query parameters based on the filter values and the query parameters are used to update the filters on component mount.
+
 import Button from "antd/lib/button";
 import Table, { ColumnType } from "antd/lib/table";
 import Title from "antd/lib/typography/Title";
@@ -337,7 +341,7 @@ const AllProducts: FC = () => {
     ]
   );
 
-  type ProductColumnType = ColumnType<typeof filteredProducts[number]>;
+  type ProductColumnType = ColumnType<(typeof filteredProducts)[number]>;
 
   const nameColumn: ProductColumnType = useMemo(
     () => ({

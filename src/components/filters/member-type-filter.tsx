@@ -1,4 +1,7 @@
-// See https://ant.design/components/form/#components-form-demo-customized-form-controls
+/*
+MemberTypeFilter - A React component that allows selecting multiple member types using Antd's Select component.
+Uses MemberTypesCtx and LanguageCtx from context for data and translation.
+*/
 
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";

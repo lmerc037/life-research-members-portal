@@ -1,3 +1,6 @@
+// OrgScopeFilter is a functional component that returns an Ant Design Select component for selecting organization types.
+// This component uses the OrgScopeCtx and LanguageCtx context and the GetLanguage utility.
+
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";
 import { LanguageCtx } from "../../services/context/language-ctx";

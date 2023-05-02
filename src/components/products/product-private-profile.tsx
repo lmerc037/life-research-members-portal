@@ -1,3 +1,6 @@
+// this is a  component that displays a private product profile.
+// The component also uses several other components such as ProductPrivateDescription, ProductPrivateForm, ProductAdminForm and DeleteProductButton.
+
 import Empty from "antd/lib/empty";
 import Button from "antd/lib/button";
 import Card from "antd/lib/card/Card";

@@ -1,3 +1,8 @@
+/**
+This component displays the public information of a partner, including organization type, organization scope, and description.
+If the partner has partner members and the user is an admin, these members are also displayed.
+*/
+
 import Grid from "antd/lib/grid";
 import Descriptions from "antd/lib/descriptions";
 import Item from "antd/lib/descriptions/Item";

@@ -1,3 +1,7 @@
+// LevelFilter is a functional component that acts as a filter for levels
+// Utilizes antd's Select component and the levels data from the LevelsCtx context
+// Props include the id, value, onChange and getPopupContainer for the Select component
+
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";
 import { LevelsCtx } from "../../services/context/levels-ctx";

@@ -1,6 +1,5 @@
 import type { NextPage } from "next/types";
 import Welcome from "../components/welcome";
-import Footer from "../components/footer";
 import Layout from "../components/layout/layout";
 
 const Home: NextPage = () => {

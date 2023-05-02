@@ -1,3 +1,5 @@
+// This component displays the profile of an event, with the possibility to view or edit it
+
 import Empty from "antd/lib/empty";
 import Button from "antd/lib/button";
 import Card from "antd/lib/card/Card";

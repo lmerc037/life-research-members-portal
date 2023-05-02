@@ -1,3 +1,7 @@
+//This component is a form used to edit the public information of a product.
+//The component has various functions to compare the initial data of the product with the data entered in the form (`diffMembers`, `diffTargets`, and `diffPartners`).
+//The component also has a `validateAndSubmit` function that can be called from the SaveChangesCtx context to validate and submit the form.
+
 import Button from "antd/lib/button";
 import Form from "antd/lib/form";
 import { useForm } from "antd/lib/form/Form";
@@ -171,7 +175,7 @@ const PublicProductForm: FC<Props> = ({ product, onSuccess }) => {
         deleteMembers,
         addMembers,
       };
-      
+
       const newInfo = await updateProductPublic(product.id, params);
       setLoading(false);
       if (newInfo) {

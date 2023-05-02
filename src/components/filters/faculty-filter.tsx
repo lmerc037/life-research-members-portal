@@ -1,5 +1,10 @@
-// See https://ant.design/components/form/#components-form-demo-customized-form-controls
-
+/*
+  FacultyFilter is a React component that displays a dropdown menu for selecting multiple faculties.
+  It uses the data from the FacultiesCtx context and the language from the LanguageCtx context.
+  The selected faculties can be passed as a `value` prop (as a Set of faculty IDs),
+  and the changes to the selection can be passed as the `onChange` prop (a callback with the new Set of IDs).
+  The `getPopupContainer` prop can be used to specify the container of the dropdown menu.
+*/
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";
 import { FacultiesCtx } from "../../services/context/faculties-ctx";

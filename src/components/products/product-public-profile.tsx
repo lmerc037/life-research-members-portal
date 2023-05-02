@@ -1,3 +1,7 @@
+// This component displays the public profile of a product
+// The component uses the "PublicProductDescription" component to display the description of the product
+// The component uses the LanguageCtx to display the title of the product in either English or French based on the language context value
+
 import Empty from "antd/lib/empty";
 import Card from "antd/lib/card/Card";
 import Title from "antd/lib/typography/Title";

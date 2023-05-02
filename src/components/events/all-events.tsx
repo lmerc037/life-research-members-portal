@@ -1,3 +1,7 @@
+// This is a component that displays a table of events, with filters to filter the events based on name, type, start date and end date.
+// The component also has buttons to create new events, refresh the events and clear the filters.
+// The component also updates the URL query parameters based on the filter values and the query parameters are used to update the filters on component mount.
+
 import Button from "antd/lib/button";
 import Table, { ColumnType } from "antd/lib/table";
 import Title from "antd/lib/typography/Title";
@@ -292,7 +296,7 @@ const AllEvents: FC = () => {
     [allEvents, nameFilter, typeFilter, startDateFilter, endDateFilter, en]
   );
 
-  type EventColumnType = ColumnType<typeof filteredEvents[number]>;
+  type EventColumnType = ColumnType<(typeof filteredEvents)[number]>;
 
   const nameColumn: EventColumnType = useMemo(
     () => ({

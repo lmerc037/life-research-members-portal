@@ -1,3 +1,12 @@
+/**
+ * PrivatePartnerProfile component is a card which displays private information of a partner.
+ * It also allows editing the public information of the partner.
+ * The information is fetched from the API using `usePrivatePartnerInfo` hook.
+ * The component has two modes, view mode and edit mode.
+ * The component also handles the prompt to save changes before navigating away from the form.
+ * The component also includes a `DeletePartnerButton` component to delete the partner.
+ */
+
 import Empty from "antd/lib/empty";
 import Card from "antd/lib/card/Card";
 import Title from "antd/lib/typography/Title";

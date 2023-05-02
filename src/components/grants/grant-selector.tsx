@@ -1,3 +1,10 @@
+/*
+This component is a form element that allows a user to search for existing grants and select one or more of them. 
+It uses the antd AutoComplete component to search for grants and display the results. 
+The selected grants are displayed as tags, and the user can delete or edit the tags if desired. 
+The component also provides an onChange callback that returns the selected grants as a Map.
+*/
+
 import React, { FC, useContext, useEffect, useState } from "react";
 import type { grant } from "@prisma/client";
 import { GrantsCtx } from "../../services/context/grants-ctx";
@@ -46,7 +53,7 @@ const GrantSelector: FC<Props> = ({
     setSearchValue("");
   }
 
-  function onSelect(optionValue: string, option: typeof options[number]) {
+  function onSelect(optionValue: string, option: (typeof options)[number]) {
     clearState();
     addToList(option.grant);
   }

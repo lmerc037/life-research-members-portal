@@ -1,4 +1,9 @@
-// See https://ant.design/components/form/#components-form-demo-customized-form-controls
+/* 
+  ProductTypeFilter: A component that displays a filter dropdown to select product types. 
+  Uses values from the productTypes context. 
+  Supports multi-select and allows clearing of selection. 
+*/
+
 
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";

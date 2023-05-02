@@ -1,3 +1,8 @@
+// This component is used to register a new product in the system.
+// It contains form fields for all the required information for product registration, including title (English and French), publication date, DOI, all authors, product type, status (on-going or not), peer reviewed or not, and abstract/note.
+// The form uses the Antd UI library components to provide a user-friendly interface for input.
+// Upon submission, the handleRegister function is called to send the product data to the server for storage.
+
 import { Button, Col, DatePicker, Row, Switch } from "antd";
 import Select from "antd/lib/select";
 import Form from "antd/lib/form";

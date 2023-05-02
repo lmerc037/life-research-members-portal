@@ -1,3 +1,7 @@
+// ProductTitleFilter - A component for filtering products by title
+// Uses the context `AllProductsCtx` to retrieve a list of all products
+// Uses the context `LanguageCtx` to determine the language for the title
+
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";
 import { LanguageCtx } from "../../services/context/language-ctx";
@@ -44,7 +48,7 @@ const ProductTitleFilter: FC<Props> = ({
 
   function filterOption(
     input: string,
-    option?: typeof options[number]
+    option?: (typeof options)[number]
   ): boolean {
     if (!option) return false;
     return fuzzyIncludes(option.label, input);

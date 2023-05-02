@@ -1,3 +1,8 @@
+// This component is the main landing page of the LRI Member Portal.
+// The component displays a personalized greeting to the user based on their authentication status and role
+// The component also  provides an overview of the portal information and displays a banner image, a tagline, and quick links to key sections of the portal
+// The information displayed is dynamic and changes based on the user's authentication status, language preference and profile information.
+
 import { Row, Col, Typography, Divider, Space } from "antd";
 import {
   TeamOutlined,

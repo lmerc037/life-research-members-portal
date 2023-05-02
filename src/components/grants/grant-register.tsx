@@ -1,3 +1,9 @@
+// This component provides a form for registering a grant.
+// It uses the Ant Design UI library to create a form with input fields for various details about the grant, including its title, amount, status, submission date, obtained date, completed date, source, all investigators, topic, and note.
+// The component also has a switch for marking whether the grant was obtained through the LRI.
+// The form uses the context API to access language, grant sources, grant statuses, and all topics data from the global state.
+// The component uses the useForm hook from the Ant Design library to handle form submissions and reset the form after a successful submission.
+
 import { Button, Col, DatePicker, Row, Switch } from "antd";
 import Select from "antd/lib/select";
 import Form from "antd/lib/form";

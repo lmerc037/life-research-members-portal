@@ -1,3 +1,7 @@
+// PublicPartnerProfile component displays the public information of an organization using PublicPartnerDescription component and a Card component from Ant Design library.
+//It takes the ID of the organization as a prop and uses the usePublicOrganizationInfo hook to retrieve the information of the organization.
+//The component also makes use of the LanguageCtx context to toggle the language of the component between English and French.
+
 import Empty from "antd/lib/empty";
 import Card from "antd/lib/card/Card";
 import Title from "antd/lib/typography/Title";

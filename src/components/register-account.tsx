@@ -1,3 +1,6 @@
+// This component implements a form for creating new user accounts
+// with the ability to register as a Member or an Admin
+
 import { Button } from "antd";
 import Form from "antd/lib/form";
 import Input from "antd/lib/input";
@@ -71,7 +74,10 @@ const RegisterAccount: FC = () => {
           name="login_email"
           rules={[
             { required: true, message: en ? "Required" : "Requis" },
-            { type: "email", message: en ? "Invalid Email" : "Courriel invalide" },
+            {
+              type: "email",
+              message: en ? "Invalid Email" : "Courriel invalide",
+            },
           ]}
         >
           <Input />
@@ -82,14 +88,19 @@ const RegisterAccount: FC = () => {
           validateFirst={true}
           rules={[
             { required: true, message: en ? "Required" : "Requis" },
-            { type: "email", message: en ? "Invalid Email" : "Courriel invalide" },
+            {
+              type: "email",
+              message: en ? "Invalid Email" : "Courriel invalide",
+            },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (getFieldValue("login_email") === value)
                   return Promise.resolve();
                 return Promise.reject(
                   new Error(
-                    en ? "The two provided emails do not match" : "Les deux courriels fournis ne correspondent pas"
+                    en
+                      ? "The two provided emails do not match"
+                      : "Les deux courriels fournis ne correspondent pas"
                   )
                 );
               },

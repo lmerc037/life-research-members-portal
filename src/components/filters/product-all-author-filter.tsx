@@ -1,6 +1,9 @@
+// ProductAllAuthorFilter is a React component that uses Antd Select component to render a multiple select input that allows the user to filter products based on authors.
+// It uses the fuzzyIncludes utility to filter options and getPopupContainer prop to control the container
+// of the select dropdown. It retrieves the allProducts from the AllProductsCtx and the language from LanguageCtx.
+
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";
-import { LanguageCtx } from "../../services/context/language-ctx";
 import { AllProductsCtx } from "../../services/context/all-products-ctx";
 import type { ProductPublicInfo } from "../../services/_types";
 import fuzzyIncludes from "../../utils/front-end/fuzzy-includes";
@@ -23,7 +26,6 @@ const ProductAllAuthorFilter: FC<Props> = ({
   getPopupContainer,
 }) => {
   const { allProducts } = useContext(AllProductsCtx);
-  const { en } = useContext(LanguageCtx);
 
   const valueArray = useMemo(() => Array.from(value.values()), [value]);
 
@@ -55,7 +57,7 @@ const ProductAllAuthorFilter: FC<Props> = ({
 
   function filterOption(
     input: string,
-    option?: typeof options[number]
+    option?: (typeof options)[number]
   ): boolean {
     if (!option) return false;
     return fuzzyIncludes(option.label, input);

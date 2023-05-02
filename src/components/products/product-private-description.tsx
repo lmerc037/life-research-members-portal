@@ -1,3 +1,10 @@
+/*
+  This component displays private information about a product.
+  It uses the Descriptions component from the Ant Design library to present information in a clear and organized manner.
+  The component also uses the LanguageCtx context to determine the language to display the information in.
+*/
+
+
 import Grid from "antd/lib/grid";
 import Descriptions from "antd/lib/descriptions";
 import Item from "antd/lib/descriptions/Item";

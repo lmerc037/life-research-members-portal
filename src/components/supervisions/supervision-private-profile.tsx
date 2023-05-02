@@ -1,3 +1,6 @@
+// A component that displays a private supervision profile.
+// It can either show supervision information or allow the user to edit the supervision's information.
+
 import Empty from "antd/lib/empty";
 import Button from "antd/lib/button";
 import Card from "antd/lib/card/Card";

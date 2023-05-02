@@ -1,3 +1,10 @@
+/**
+
+PublicGrantDescription component displays the public information of a grant in a table format.
+The component uses Ant Design's Descriptions component to render the grant's information.
+It takes the grant's information from the grant object passed as a prop.
+*/
+
 import Grid from "antd/lib/grid";
 import Descriptions from "antd/lib/descriptions";
 import Item from "antd/lib/descriptions/Item";

@@ -1,4 +1,9 @@
-// See https://ant.design/components/form/#components-form-demo-customized-form-controls
+/*
+This component is a form element that allows a user to search for partners/organizations and select one or more of them. 
+It uses the antd AutoComplete component to search for partners/organizations and display the results. 
+The selected partners/organizations are displayed as tags, and the user can delete or edit the tags if desired. 
+The component also provides an onChange callback that returns the selected partners/organizations as a Map.
+*/
 
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import type { organization } from "@prisma/client";
@@ -76,7 +81,7 @@ const OrganizationSelector: FC<Props> = ({
     setSearchValue("");
   }
 
-  function onSelect(optionValue: string, option: typeof options[number]) {
+  function onSelect(optionValue: string, option: (typeof options)[number]) {
     clearState();
     addToList(option.organization);
   }

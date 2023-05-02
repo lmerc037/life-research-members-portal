@@ -1,3 +1,6 @@
+// This component is a button that opens a modal to delete a grant.
+// The modal contains a form that requires the user to confirm the grant name before deletion.
+
 import Button from "antd/lib/button";
 import Form from "antd/lib/form";
 import useForm from "antd/lib/form/hooks/useForm";
@@ -33,7 +36,7 @@ const DeleteGrantButton: FC<Props> = ({ grant, setGrant, style }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [form] = useForm<Data>();
 
-  const grantName =  grant.title;
+  const grantName = grant.title;
 
   async function submit() {
     const res = await deleteGrant(grant.id);

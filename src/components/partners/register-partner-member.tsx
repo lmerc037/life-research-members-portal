@@ -1,3 +1,8 @@
+// This component is a form that allows a user to register  his partner organization.
+// The form takes in the English and French names of the organization, the scope and type of the organization, and a description.
+// The component uses the useForm hook from antd/lib/form/Form to handle form data and the onFinish event to trigger the registerPartner function from the "../../services/register-partner-member" service.
+// The component also uses context from the LanguageCtx, OrgTypesCtx, and OrgScopeCtx contexts to determine the language of the form and the available options for organization scope and type.
+
 import { Button } from "antd";
 import Select from "antd/lib/select";
 import Form from "antd/lib/form";

@@ -1,5 +1,8 @@
+// This is a functional component that returns a list of names of principal supervisors as a list of Ant Design tags
+// The names are wrapped in a SafeLink component that links to the profile of each supervision
+// The color of each tag is generated from the string value of the name using the colorFromString utility function
+
 import React, { useContext } from "react";
-import { LanguageCtx } from "../../services/context/language-ctx";
 import PageRoutes from "../../routing/page-routes";
 import SafeLink from "../link/safe-link";
 import Tag from "antd/lib/tag";
@@ -14,9 +17,6 @@ const getMemberSupervision = (
     };
   }>
 ) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { en } = useContext(LanguageCtx);
-
   const supervisionNames = supervision_principal_supervisor.map(
     (member_supervision, i) => {
       const supervision = member_supervision.supervision;

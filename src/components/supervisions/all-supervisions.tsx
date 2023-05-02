@@ -1,3 +1,7 @@
+// This is a component that displays a table of supervisions , with filters to filter the supervisions based on supervision trainee name, faculty and level
+// The component also has buttons ta add a new supervision and clear the filters.
+// The component also updates the URL query parameters based on the filter values and the query parameters are used to update the filters on component mount.
+
 import Button from "antd/lib/button";
 import Table, { ColumnType } from "antd/lib/table";
 import Title from "antd/lib/typography/Title";
@@ -288,7 +292,9 @@ const AllSupervisions: FC = () => {
     [allSupervisions, facultyFilter, levelFilter, nameFilter]
   );
 
-  type SupervisionColumnType = ColumnType<typeof filteredSupervisions[number]>;
+  type SupervisionColumnType = ColumnType<
+    (typeof filteredSupervisions)[number]
+  >;
 
   const nameColumn: SupervisionColumnType = useMemo(
     () => ({

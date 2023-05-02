@@ -1,3 +1,9 @@
+// This is a functional component that returns a list of names involved in a partnership as a list of Ant Design tags
+// The names are wrapped in a SafeLink component that links to the profile of each organization
+// The color of each tag is generated from the string value of the name using the colorFromString utility function
+// The component uses the LanguageCtx to determine whether to display the English or French name of each organization
+
+
 import React, { useContext } from "react";
 import { LanguageCtx } from "../../services/context/language-ctx";
 import PageRoutes from "../../routing/page-routes";

@@ -1,3 +1,8 @@
+// This component is used to register a supervision trainee.
+// It uses the Form component from antd and the custom hook `useForm` to handle form inputs and submission.
+// The component also uses the context providers `LanguageCtx`, `FacultiesCtx`, and `LevelsCtx` to access the current language and lists of faculties and levels.
+// Upon submission, the data from the form is passed to the `registerSupervision` function from the `register-supervision-member` service to register the supervision trainee.
+
 import { Button, Col, DatePicker, Row } from "antd";
 import Select from "antd/lib/select";
 import Form from "antd/lib/form";

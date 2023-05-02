@@ -1,3 +1,8 @@
+// This component is a detailed view of a private grant's profile.
+// It contains tabs for public and private information, and the ability to edit and delete the grant.
+// The component has two modes, view mode and edit mode.
+// The component uses the save-changes context to prompt the user to save unsaved changes before navigating away.
+
 import Empty from "antd/lib/empty";
 import Button from "antd/lib/button";
 import Card from "antd/lib/card/Card";

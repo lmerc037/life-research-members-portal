@@ -1,4 +1,7 @@
-// See https://ant.design/components/form/#components-form-demo-customized-form-controls
+// A component to filter members based on their name. It's a multi-select component based on Ant Design's Select component.
+// Imports necessary dependencies including Ant Design's Select component and the necessary contexts to access member information.
+// Includes fuzzy search functionality to match the input string with member names.
+
 
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";

@@ -1,3 +1,8 @@
+// This component is used to display a form for editing the private information of a product.
+// The form is populated with the private information of the product passed as a prop to the component.
+// The form is built using the antd form library, and the onFinish event is used to submit the data to an API
+// for updating the private information. The component also implements the SaveChangesCtx context for handling save changes notifications.
+
 import Button from "antd/lib/button";
 import Form from "antd/lib/form";
 import { useForm } from "antd/lib/form/Form";

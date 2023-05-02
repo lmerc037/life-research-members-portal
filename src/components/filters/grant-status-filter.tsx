@@ -1,3 +1,9 @@
+// This is a component that provides a dropdown list for selecting multiple statuses of grant
+// Uses grant statuses from GrantStatusCtx and language context from LanguageCtx to determine label language
+// Triggers onSelect or onDeselect when an option is selected or deselected
+// Supports custom popup container through getPopupContainer prop
+// Exports the component as the default export
+
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";
 import { LanguageCtx } from "../../services/context/language-ctx";

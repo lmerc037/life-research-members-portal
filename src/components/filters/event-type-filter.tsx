@@ -1,3 +1,7 @@
+//EventTypeFilter: A component to filter events by their type.
+//It uses the context of event types and language to show the right label for each type.
+//It allows for multiple selections and updating the filtered event types with the onChange prop.
+
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";
 import { LanguageCtx } from "../../services/context/language-ctx";

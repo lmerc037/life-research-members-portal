@@ -1,3 +1,7 @@
+// EventNameFilter component is a multi-select dropdown that filters events by name.
+// It uses fuzzy search to match the input with event names.
+// The component is connected to AllEventsCtx and LanguageCtx to fetch all events and language preference respectively.
+
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";
 import { AllEventsCtx } from "../../services/context/all-events-ctx";
@@ -44,7 +48,7 @@ const EventNameFilter: FC<Props> = ({
 
   function filterOption(
     input: string,
-    option?: typeof options[number]
+    option?: (typeof options)[number]
   ): boolean {
     if (!option) return false;
     return fuzzyIncludes(option.label, input);

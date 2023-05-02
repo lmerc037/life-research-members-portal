@@ -1,3 +1,9 @@
+/**
+PublicGrantForm component displays a form for updating public information of a grant.
+The form allows users to update the title, amount, status, source, topic, and notes of the grant.
+Additionally, it also allows users to associate investigators and members involved with the grant.
+*/
+
 import React, { FC, useContext, useState, useCallback, useEffect } from "react";
 import { LanguageCtx } from "../../services/context/language-ctx";
 import { useForm } from "antd/lib/form/Form";
@@ -28,8 +34,7 @@ import updateGrantPublic from "../../services/update-grant-public";
 import moment from "moment";
 import GetLanguage from "../../utils/front-end/get-language";
 import { Switch } from "antd";
-import GrantMemberInvestigatorSelector from "./grant-member-investigator-selector";
-import GrantMemberInvolvedSelector from "./grant-member-involved-selector";
+import MemberSelector from "../members/member-selector";
 
 const { Option } = Select;
 
@@ -415,7 +420,7 @@ const PublicGrantForm: FC<Props> = ({ grant, onSuccess }) => {
           {en ? "Grant Investigator Member" : "Membre chercheur"}
         </label>
         <Form.Item name="membersInvestigator">
-          <GrantMemberInvestigatorSelector
+          <MemberSelector
             setErrors={(e) =>
               form.setFields([{ name: "membersInvestigator", errors: e }])
             }
@@ -426,7 +431,7 @@ const PublicGrantForm: FC<Props> = ({ grant, onSuccess }) => {
           {en ? "Grant Member Involved" : "Membre impliqué"}
         </label>
         <Form.Item name="membersInvolved">
-          <GrantMemberInvolvedSelector
+          <MemberSelector
             setErrors={(e) =>
               form.setFields([{ name: "membersInvolved", errors: e }])
             }

@@ -1,3 +1,5 @@
+// this component is a presentational component that displays a product in a tag format.
+
 import CloseOutlined from "@ant-design/icons/lib/icons/CloseOutlined";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import type { product } from "@prisma/client";

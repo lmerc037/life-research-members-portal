@@ -1,3 +1,5 @@
+//This is a form component that allows the user to edit public information of a supervision.
+
 import React, { FC, useContext, useState, useCallback, useEffect } from "react";
 import { LanguageCtx } from "../../services/context/language-ctx";
 import { useForm } from "antd/lib/form/Form";
@@ -10,7 +12,6 @@ import DatePicker from "antd/lib/date-picker";
 import type { Moment } from "moment";
 import { FacultiesCtx } from "../../services/context/faculties-ctx";
 import { LevelsCtx } from "../../services/context/levels-ctx";
-
 import Divider from "antd/lib/divider";
 import Notification from "../../services/notifications/notification";
 import {
@@ -26,10 +27,8 @@ import type {
 import GetLanguage from "../../utils/front-end/get-language";
 import updateSupervisionPublic from "../../services/update-supervision-public";
 import type { UpdateSupervisionPublicParams } from "../../pages/api/update-supervision/[id]/public";
-import SupervisionTraineeSelector from "./supervision-trainee-selector";
-import SupervisionSupervisorSelector from "./supervision-supervisor-selector";
-import SupervisionCoSupervisorSelector from "./supervision-cosupervisor-selector";
-import SupervisionCommitteeSelector from "./supervision-committee-selector";
+import MemberSelector from "../members/member-selector";
+
 const { Option } = Select;
 
 type Props = {
@@ -391,6 +390,20 @@ const PublicSupervisionForm: FC<Props> = ({ supervision, onSuccess }) => {
         onValuesChange={() => setDirty(true)}
       >
         <Form.Item
+          label={en ? "First Name" : "Prénom"}
+          name="first_name"
+          rules={[
+            {
+              required: true,
+              message: en
+                ? "Please input the first name!"
+                : "Veuillez saisir le prénom !",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
           label={en ? "Last Name" : "Nom"}
           name="last_name"
           rules={[
@@ -405,26 +418,11 @@ const PublicSupervisionForm: FC<Props> = ({ supervision, onSuccess }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label={en ? "First Name" : "Prénom"}
-          name="first_name"
-          rules={[
-            {
-              required: true,
-              message: en
-                ? "Please input the first name!"
-                : "Veuillez saisir le prénom !",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
         <label htmlFor="membersTrainee">
           {en ? "Trainee" : "Supervisé(e)"}
         </label>
         <Form.Item name="membersTrainee">
-          <SupervisionTraineeSelector
+          <MemberSelector
             setErrors={(e) =>
               form.setFields([{ name: "membersTrainee", errors: e }])
             }
@@ -491,7 +489,7 @@ const PublicSupervisionForm: FC<Props> = ({ supervision, onSuccess }) => {
           {en ? "Principal Supervisor" : "Superviseur(e) principal(e)"}
         </label>
         <Form.Item name="membersSupervisor">
-          <SupervisionSupervisorSelector
+          <MemberSelector
             setErrors={(e) =>
               form.setFields([{ name: "membersSupervisor", errors: e }])
             }
@@ -502,7 +500,7 @@ const PublicSupervisionForm: FC<Props> = ({ supervision, onSuccess }) => {
           {en ? "Co-Supervisors" : "Co-superviseur(e)s"}
         </label>
         <Form.Item name="membersCoSupervisor">
-          <SupervisionCoSupervisorSelector
+          <MemberSelector
             setErrors={(e) =>
               form.setFields([{ name: "membersCoSupervisor", errors: e }])
             }
@@ -513,7 +511,7 @@ const PublicSupervisionForm: FC<Props> = ({ supervision, onSuccess }) => {
           {en ? "Committee Members" : "Membres du comité"}
         </label>
         <Form.Item name="membersCommittee">
-          <SupervisionCommitteeSelector
+          <MemberSelector
             setErrors={(e) =>
               form.setFields([{ name: "membersCommittee", errors: e }])
             }

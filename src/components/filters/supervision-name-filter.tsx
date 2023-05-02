@@ -1,4 +1,5 @@
-// See https://ant.design/components/form/#components-form-demo-customized-form-controls
+// SupervisionNameFilter is a React functional component that provides a multiselect dropdown for filtering a list of supervisions based on their names.
+// The component uses the Ant Design Select component and the `allSupervisions` context from `AllSupervisionsCtx`.
 
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";
@@ -44,7 +45,7 @@ const SupervisionNameFilter: FC<Props> = ({
 
   function filterOption(
     input: string,
-    option?: typeof options[number]
+    option?: (typeof options)[number]
   ): boolean {
     if (!option) return false;
     return fuzzyIncludes(option.label, input);

@@ -1,3 +1,10 @@
+// This is a functional component that returns a list of products authored by members
+// The product list is displayed using Ant Design's List component
+// Each item in the list includes the product's title and a link to its profile
+// The link is wrapped in a SafeLink component
+// The color of each product title is generated from the string value of the title using the colorFromString utility function
+// The component uses the LanguageCtx to determine whether to display the English or French title of each product
+
 import React, { useContext } from "react";
 import PageRoutes from "../../routing/page-routes";
 import SafeLink from "../link/safe-link";

@@ -1,3 +1,9 @@
+/*
+This component allows an admin user to delete a partner from the system. 
+The component displays a confirmation modal when the delete button is clicked, and verifies that the user has entered the correct name of the partner before proceeding with the deletion. 
+The deletion is performed using the deletePartner service, and the user is redirected to the all partners page upon successful deletion.
+*/
+
 import Button from "antd/lib/button";
 import Form from "antd/lib/form";
 import useForm from "antd/lib/form/hooks/useForm";

@@ -1,3 +1,7 @@
+// This component allows editing of public information of a Partner, such as name, type, scope, and description.
+// It makes use of the Ant Design form components, and updates the information by calling the updatePartnerPublic function.
+// It also displays a notification on success or failure of the update.
+
 import Button from "antd/lib/button";
 import Form from "antd/lib/form";
 import { useForm } from "antd/lib/form/Form";

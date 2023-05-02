@@ -1,3 +1,5 @@
+//This component is a form element that allows a user to search for existing events and select one or more of them.
+
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import type { event } from "@prisma/client";
 import AutoComplete from "antd/lib/auto-complete";
@@ -61,7 +63,7 @@ const EventSelector: FC<Props> = ({
     setSearchValue("");
   }
 
-  function onSelect(optionValue: string, option: typeof options[number]) {
+  function onSelect(optionValue: string, option: (typeof options)[number]) {
     clearState();
     addToList(option.event);
   }

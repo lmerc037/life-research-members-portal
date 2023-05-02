@@ -1,3 +1,7 @@
+//A functional component that displays the public information of a product in a descriptive layout using Ant Design's Descriptions component.
+//The information displayed includes the product's abstract, product type, published date, DOI, product partnerships, product target, authors, and member authors.
+//The component uses the LanguageCtx to toggle between English and French content.
+
 import Grid from "antd/lib/grid";
 import Descriptions from "antd/lib/descriptions";
 import Item from "antd/lib/descriptions/Item";

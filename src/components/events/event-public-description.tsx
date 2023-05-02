@@ -1,3 +1,5 @@
+// Displays information about a public event
+
 import Grid from "antd/lib/grid";
 import Descriptions from "antd/lib/descriptions";
 import Item from "antd/lib/descriptions/Item";

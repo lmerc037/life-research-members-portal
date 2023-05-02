@@ -1,3 +1,5 @@
+// This component is a presentational component that displays an event in a tag format.
+
 import CloseOutlined from "@ant-design/icons/lib/icons/CloseOutlined";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import type { event } from "@prisma/client";

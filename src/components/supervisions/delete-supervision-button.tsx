@@ -1,3 +1,6 @@
+// This component is a button that opens a modal to delete a supervision.
+// The modal contains a form that requires the user to confirm the supervision trainee name before deletion.
+
 import Button from "antd/lib/button";
 import Form from "antd/lib/form";
 import useForm from "antd/lib/form/hooks/useForm";

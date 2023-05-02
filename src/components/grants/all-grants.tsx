@@ -1,3 +1,7 @@
+// This is a component that displays a table of grants, with filters to filter the grants based on name, status and source
+// The component also has buttons to add a new grant when login in as an administrator and clear the filters.
+// The component also updates the URL query parameters based on the filter values and the query parameters are used to update the filters on component mount.
+
 import Button from "antd/lib/button";
 import Table, { ColumnType } from "antd/lib/table";
 import Title from "antd/lib/typography/Title";
@@ -328,7 +332,7 @@ const AllGrants: FC = () => {
     [allGrants, statusFilter, sourceFilter, nameFilter]
   );
 
-  type GrantColumnType = ColumnType<typeof filteredGrants[number]>;
+  type GrantColumnType = ColumnType<(typeof filteredGrants)[number]>;
 
   const nameColumn: GrantColumnType = useMemo(
     () => ({
@@ -378,7 +382,7 @@ const AllGrants: FC = () => {
       className: "amount-column",
       render: (value) => `$ ${value?.toLocaleString()}`,
     }),
-    []
+    [en]
   );
 
   const submissionDateColumn: GrantColumnType = useMemo(
@@ -391,7 +395,7 @@ const AllGrants: FC = () => {
         return date.toISOString().split("T")[0];
       },
     }),
-    []
+    [en]
   );
 
   const memberInvolvedColumn: GrantColumnType = useMemo(() => {
@@ -410,7 +414,7 @@ const AllGrants: FC = () => {
         return <div>{getMemberInvolved(grant_member_involved)}</div>;
       },
     };
-  }, []);
+  }, [en]);
 
   const investigatorMemberColumn: GrantColumnType = useMemo(() => {
     return {
@@ -428,7 +432,7 @@ const AllGrants: FC = () => {
         return <div>{getInvestigatorMember(grant_investigator_member)}</div>;
       },
     };
-  }, []);
+  }, [en]);
 
   const columns: GrantColumnType[] = [nameColumn];
   if (showSource) columns.push(sourceColumn);

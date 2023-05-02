@@ -1,3 +1,7 @@
+// This is a component that displays a table of partners (organizations), with filters to filter the partners based on name, type and scope
+// The component also has buttons to create new partner when login in as an administrator and clear the filters.
+// The component also updates the URL query parameters based on the filter values and the query parameters are used to update the filters on component mount.
+
 import Button from "antd/lib/button";
 import Table, { ColumnType } from "antd/lib/table";
 import Title from "antd/lib/typography/Title";
@@ -240,7 +244,9 @@ const AllPartners: FC = () => {
     [allPartners, typeFilter, scopeFilter, nameFilter, en]
   );
 
-  type OrganizationColumnType = ColumnType<typeof filteredOrganisation[number]>;
+  type OrganizationColumnType = ColumnType<
+    (typeof filteredOrganisation)[number]
+  >;
 
   const nameColumn: OrganizationColumnType = useMemo(
     () => ({
@@ -352,7 +358,9 @@ const AllPartners: FC = () => {
           checked={showScope}
           onChange={(e) => handleShowScopeChange(e.target.checked)}
         >
-          {en ? "Show Organization Scope" : "Afficher la portée de l'organisation"}
+          {en
+            ? "Show Organization Scope"
+            : "Afficher la portée de l'organisation"}
         </Checkbox>
       </span>
     </Form>

@@ -1,3 +1,5 @@
+//This component is a form that allows to update the admin information of a product.
+
 import Button from "antd/lib/button";
 import Form from "antd/lib/form";
 import { useForm } from "antd/lib/form/Form";

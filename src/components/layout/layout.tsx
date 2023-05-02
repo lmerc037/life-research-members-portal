@@ -1,4 +1,11 @@
-// components/Layout.tsx
+/*
+A simple layout component that contains the main content of the page and a footer. 
+it has two sub-components:
+  children - The components that are passed as children to this component
+  Footer - The footer component that is a part of the layout
+The component ensures that the content takes up at least the full height of the viewport.
+*/
+
 import React from "react";
 import Footer from "./../footer";
 

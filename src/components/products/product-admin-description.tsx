@@ -1,3 +1,6 @@
+// This is a functional component that displays the private information of a product.
+// The component uses the LanguageCtx context to determine the language to display.
+
 import Grid from "antd/lib/grid";
 import Descriptions from "antd/lib/descriptions";
 import Item from "antd/lib/descriptions/Item";

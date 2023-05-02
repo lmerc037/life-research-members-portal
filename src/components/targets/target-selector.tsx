@@ -71,7 +71,7 @@ const TargetSelector: FC<Props> = ({
     setSearchValue("");
   }
 
-  function onSelect(optionValue: string, option: typeof options[number]) {
+  function onSelect(optionValue: string, option: (typeof options)[number]) {
     clearState();
     addToList(option.target);
   }

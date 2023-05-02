@@ -1,8 +1,16 @@
-// See https://ant.design/components/form/#components-form-demo-customized-form-controls
+// A component that allows the user to select multiple keywords from a list of all available keywords.
+// The selected keywords are displayed as tags and can be deleted by the user.
 
 import type { keyword } from "@prisma/client";
 import Select, { SelectProps } from "antd/lib/select";
-import { FC, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import {
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { AllKeywordsCtx } from "../../services/context/all-keywords-ctx";
 import { LanguageCtx } from "../../services/context/language-ctx";
 import fuzzyIncludes from "../../utils/front-end/fuzzy-includes";
@@ -45,7 +53,10 @@ const KeywordFilter: FC<Props> = ({
   );
 
   const options = useMemo(
-    () => keywords.map((k) => getOption(k)).sort((a, b) => a.label.localeCompare(b.label)),
+    () =>
+      keywords
+        .map((k) => getOption(k))
+        .sort((a, b) => a.label.localeCompare(b.label)),
     [getOption, keywords]
   );
 
@@ -63,12 +74,17 @@ const KeywordFilter: FC<Props> = ({
     onChange(new Set());
   }
 
-  function filterOption(input: string, option?: typeof options[number]): boolean {
+  function filterOption(
+    input: string,
+    option?: (typeof options)[number]
+  ): boolean {
     if (!option) return false;
     return fuzzyIncludes(option.label, input);
   }
 
-  function tagRender(props: Parameters<NonNullable<SelectProps["tagRender"]>>[0]) {
+  function tagRender(
+    props: Parameters<NonNullable<SelectProps["tagRender"]>>[0]
+  ) {
     const keyword = keywordMap.get(props.value);
     if (!keyword) return <></>;
     return <KeywordTag keyword={keyword} deletable onDelete={onDelete} />;

@@ -1,3 +1,11 @@
+/*
+// OrganizationTag component is a presentational component that displays a partner in a tag format.
+// The component can also trigger callbacks for clicking the tag, deleting the tag, and editing the tag.
+// The component uses the colorFromString utility to determine the background color of the tag based on the partner name.
+// The component uses the SafeLink component to make the tag linkable if specified.
+*/
+
+
 import CloseOutlined from "@ant-design/icons/lib/icons/CloseOutlined";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import type { organization } from "@prisma/client";

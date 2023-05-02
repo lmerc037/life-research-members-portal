@@ -1,3 +1,5 @@
+// This component allows users to register a new event by providing the event's name in English and French, date range, event type, and a note.
+
 import { Button, Col, DatePicker, Row, Switch } from "antd";
 import Select from "antd/lib/select";
 import Form from "antd/lib/form";

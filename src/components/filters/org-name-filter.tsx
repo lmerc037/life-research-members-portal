@@ -1,4 +1,9 @@
-// See https://ant.design/components/form/#components-form-demo-customized-form-controls
+// OrgNameFilter - a React component to filter a list of organizations by their name
+// Implements antd's Select component with multiple selection mode
+// Uses the AllPartnersCtx context to get a list of all organizations
+// Uses the LanguageCtx context to determine the language to display the name in
+// Renders each option as the name of the organization, in either English or French based on the language context
+// Allows clearing the selection, and calls the onChange prop with an empty Set when it is cleared
 
 import Select, { SelectProps } from "antd/lib/select";
 import { FC, useContext, useMemo } from "react";

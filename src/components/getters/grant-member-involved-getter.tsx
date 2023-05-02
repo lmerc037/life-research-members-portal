@@ -1,3 +1,7 @@
+// This is a functional component that returns a list of names of members involved in a grant as a list of Ant Design tags
+// The names are wrapped in a SafeLink component that links to the profile of each member
+// The color of each tag is generated from the string value of the name using the colorFromString utility function
+
 import React from "react";
 import PageRoutes from "../../routing/page-routes";
 import SafeLink from "../link/safe-link";

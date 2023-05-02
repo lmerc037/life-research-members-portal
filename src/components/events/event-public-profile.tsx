@@ -1,3 +1,6 @@
+// This is a component that displays the public profile of an event.
+// It uses the "usePublicEventInfo" hook to fetch the data for the event, and the "LanguageCtx" context to determine the preferred language.
+
 import Empty from "antd/lib/empty";
 import Card from "antd/lib/card/Card";
 import Title from "antd/lib/typography/Title";

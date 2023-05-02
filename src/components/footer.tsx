@@ -1,4 +1,7 @@
-// components/Footer.tsx
+// Footer component for the LIFE Research Institute website
+// Displayed at the bottom of every page
+// Shows the copyright information and a link to the privacy policy of the University of Ottawa (the parent organization of LIFE Research Institute)
+// The language for the footer text is determined by the context from the LanguageCtx provider.
 
 import { Row, Col } from "antd";
 import SafeLink from "./link/safe-link";

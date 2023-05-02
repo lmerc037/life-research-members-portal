@@ -1,3 +1,10 @@
+// This is a functional component that allows the user to filter events by date range
+// The component is connected to the AllEventsCtx to retrieve a list of all events
+// The component includes an Ant Design DatePicker.RangePicker component to select a date range
+// The filtered events can be passed to a callback function (onChange) with the selected date range and the filtered events as arguments
+// The component stores the selected date range in its state (dateRange)
+// The component can receive additional props, such as an ID and a getPopupContainer function, to customize the DatePicker component
+
 import { FC, useContext, useState } from "react";
 import { AllEventsCtx } from "../../services/context/all-events-ctx";
 import type { EventPublicInfo } from "../../services/_types";

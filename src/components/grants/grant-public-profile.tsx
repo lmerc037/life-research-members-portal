@@ -1,3 +1,8 @@
+// This component displays the public grant profile information for a specific grant id.
+// It makes use of the usePublicGrantInfo custom hook to fetch grant information and the LanguageCtx to determine the language to be displayed.
+// The grant information is displayed within a Card component with a header containing the grant title.
+// The grant description is displayed using the PublicGrantDescription component.
+
 import Empty from "antd/lib/empty";
 import Card from "antd/lib/card/Card";
 import Title from "antd/lib/typography/Title";

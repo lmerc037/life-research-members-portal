@@ -1,3 +1,6 @@
+// This is a modal button component that, when clicked, opens a modal to confirm the deletion of an event.
+// The modal includes a form with an input field to confirm the deletion by typing the name of the event.
+
 import Button from "antd/lib/button";
 import Form from "antd/lib/form";
 import useForm from "antd/lib/form/hooks/useForm";
