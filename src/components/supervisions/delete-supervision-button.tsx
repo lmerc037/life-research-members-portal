@@ -22,6 +22,7 @@ import deleteSupervision from "../../services/delete-supervision";
 import { useRouter } from "next/router";
 import PageRoutes from "../../routing/page-routes";
 import Notification from "../../services/notifications/notification";
+import { ActiveAccountCtx } from "../../services/context/active-account-ctx"; // Add this import
 
 type Data = { confirmation: string };
 type Props = {
@@ -41,12 +42,17 @@ const DeleteSupervisionButton: FC<Props> = ({
   const [form] = useForm<Data>();
 
   const supervisionName = supervision.first_name + " " + supervision.last_name;
+  const { localAccount } = useContext(ActiveAccountCtx);
 
   async function submit() {
     const res = await deleteSupervision(supervision.id);
     if (res) {
       setModalOpen(false);
-      router.push(PageRoutes.allSupervisions);
+      if (localAccount?.is_admin) {
+        router.push(PageRoutes.allSupervisions);
+      } else {
+        router.push(PageRoutes.myProfile);
+      }
     }
   }
 
