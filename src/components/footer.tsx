@@ -16,7 +16,9 @@ const Footer = () => {
       <Row justify="space-between" align="middle" style={{ padding: "16px 0" }}>
         <Col>
           <span>
-            © {new Date().getFullYear()} LIFE Research Institute.{" "}
+            © {new Date().getFullYear()}{" "}
+            {en ? "LIFE Research Institute" : "Institut de recherche LIFE"}
+            {" - "}
             {en ? "All rights reserved." : "Tous droits réservés."}
           </span>
         </Col>
