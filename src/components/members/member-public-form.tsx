@@ -405,6 +405,9 @@ const PublicMemberForm: FC<Props> = ({ member, onSuccess }) => {
             setErrors={(e) => form.setFields([{ name: "keywords", errors: e }])}
           />
         </Form.Item>
+        <label htmlFor="keywords">
+          {en ? "Member's Partners" : "Partenaires du membre"}
+        </label>
         <Divider />
         <Form.Item name="organizations">
           <PartnerSelector
