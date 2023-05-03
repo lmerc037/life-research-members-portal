@@ -10,19 +10,6 @@ async function deleteProduct(id: number): Promise<product | null> {
   });
 }
 
-async function isProductMemberAuthor(memberId: number | undefined, productId: number) {
-  if (!memberId) return false;
-  const productAuthor = await db.product_member_author.findUnique({
-    where: {
-      member_id_product_id: {
-        member_id: memberId,
-        product_id: productId,
-      },
-    },
-  });
-  return !!productAuthor;
-}
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Prisma.PromiseReturnType<typeof deleteProduct> | string>
@@ -36,11 +23,8 @@ export default async function handler(
     const currentAccount = await getAccountFromRequest(req, res);
     if (!currentAccount) return;
 
-    //if (!currentAccount.is_admin && !currentAccount.member)
-
-    if (!(currentAccount.is_admin || await isProductMemberAuthor(currentAccount.member?.id, id))) {
-      return res.status(401).send("You are not authorized to delete that product.");
-    }
+    /* if (!currentAccount.is_admin)
+      return res.status(401).send("You are not authorized to delete products."); */
 
     const product = await deleteProduct(id);
 

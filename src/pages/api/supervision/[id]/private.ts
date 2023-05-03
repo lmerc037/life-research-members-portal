@@ -6,6 +6,7 @@ import getAccountFromRequest from "../../../../utils/api/get-account-from-reques
 
 export type PrivateSupervisionDBRes = Awaited<ReturnType<typeof getPrivateSupervisionInfo>>;
 
+// Dates will be stringified when sending response!
 export type PrivateSupervisionRes = Omit<
   NonNullable<PrivateSupervisionDBRes>,
   "supervision"
@@ -20,19 +21,6 @@ function getPrivateSupervisionInfo(id: number) {
   });
 }
 
-async function isPrincipalSupervisor(memberId: number | undefined, supervisionId: number) {
-  if (!memberId) return false;
-  const principalSupervisor = await db.supervision_principal_supervisor.findUnique({
-    where: {
-      member_id_supervision_id: {
-        member_id: memberId,
-        supervision_id: supervisionId,
-      },
-    },
-  });
-  return !!principalSupervisor;
-}
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<PrivateSupervisionDBRes | string>
@@ -45,7 +33,8 @@ export default async function handler(
     const currentAccount = await getAccountFromRequest(req, res);
     if (!currentAccount) return;
 
-    const authorized = currentAccount.is_admin || await isPrincipalSupervisor(currentAccount.member?.id, id);
+    const authorized =
+      currentAccount.is_admin || (currentAccount.member && currentAccount.member.id === id);
 
     if (!authorized)
       return res

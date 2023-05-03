@@ -20,6 +20,16 @@ function getPrivateProductInfo(id: number) {
   });
 }
 
+async function isProductAuthor(accountId: number, productId: number) {
+  const author = await db.product_member_author.findFirst({
+    where: {
+      product_id: productId,
+      member_id: accountId,
+    },
+  });
+  return !!author;
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<PrivateProductDBRes | string>
@@ -32,7 +42,12 @@ export default async function handler(
     const currentAccount = await getAccountFromRequest(req, res);
     if (!currentAccount) return;
 
-    const authorized = currentAccount.is_admin || currentAccount.member;
+    const isAuthor = currentAccount.member
+      ? await isProductAuthor(currentAccount.member.id, id)
+      : false;
+
+    const authorized = currentAccount.member || isAuthor || currentAccount.is_admin;
+
     if (!authorized)
       return res
         .status(401)

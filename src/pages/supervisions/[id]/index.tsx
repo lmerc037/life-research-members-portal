@@ -24,7 +24,7 @@ const PrivateSupervisionPage: NextPage = () => {
     }
 
     if (localAccount?.member) {
-      router.replace(PageRoutes.privateSupervisionProfile(id));
+      router.replace(PageRoutes.publicSupervisionProfile(id));
 
       return;
     }
