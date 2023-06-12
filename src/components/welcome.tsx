@@ -99,7 +99,7 @@ const Welcome: FC = () => {
     <>
       <h1>
         {en
-          ? "Welcome to the LIFE Research Insitute Member Portal!"
+          ? "Welcome to the LIFE Research Institute Member Portal!"
           : "Bienvenue sur le portail des membres de l'Institut de recherche LIFE!"}
       </h1>
       <h4>

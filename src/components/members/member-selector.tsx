@@ -19,7 +19,7 @@ type Props = {
 const MemberSelector: FC<Props> = ({
   id = "",
   value = new Map<number, MemberPublicInfo>(),
-  max = 10,
+  max = 1000,
   onChange = () => {},
   setErrors = () => {},
 }) => {
@@ -43,7 +43,7 @@ const MemberSelector: FC<Props> = ({
     setSearchValue("");
   }
 
-  function onSelect(optionValue: string, option: typeof options[number]) {
+  function onSelect(optionValue: string, option: (typeof options)[number]) {
     clearState();
     addToList(option.member);
   }

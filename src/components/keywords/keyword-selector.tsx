@@ -23,11 +23,15 @@ type Props = {
 const KeywordSelector: FC<Props> = ({
   id = "",
   value = new Map<number, keyword>(),
-  max = 10,
+  max = 20,
   onChange = () => {},
   setErrors = () => {},
 }) => {
-  const { keywords, refresh: refreshKeywords, set } = useContext(AllKeywordsCtx);
+  const {
+    keywords,
+    refresh: refreshKeywords,
+    set,
+  } = useContext(AllKeywordsCtx);
   const { en } = useContext(LanguageCtx);
 
   const [selectedValue, setSelectedValue] = useState("");
@@ -42,7 +46,9 @@ const KeywordSelector: FC<Props> = ({
 
   useEffect(() => {
     setModalInitialValue(
-      en ? { name_en: searchValue, name_fr: "" } : { name_en: "", name_fr: searchValue }
+      en
+        ? { name_en: searchValue, name_fr: "" }
+        : { name_en: "", name_fr: searchValue }
     );
   }, [searchValue, en]);
 
@@ -61,14 +67,16 @@ const KeywordSelector: FC<Props> = ({
     return { label: labelAndValue, value: labelAndValue, keyword: k };
   }
 
-  const options = keywords.map((k) => getOption(k)).sort((a, b) => a.label.localeCompare(b.label));
+  const options = keywords
+    .map((k) => getOption(k))
+    .sort((a, b) => a.label.localeCompare(b.label));
 
   function clearState() {
     setSelectedValue("");
     setSearchValue("");
   }
 
-  function onSelect(optionValue: string, option: typeof options[number]) {
+  function onSelect(optionValue: string, option: (typeof options)[number]) {
     clearState();
     addToList(option.keyword);
   }
@@ -90,7 +98,8 @@ const KeywordSelector: FC<Props> = ({
   }
 
   function addToList(keyword: keyword) {
-    if (!value.has(keyword.id) && value.size >= max) return setErrors?.([`Maximum ${max}`]);
+    if (!value.has(keyword.id) && value.size >= max)
+      return setErrors?.([`Maximum ${max}`]);
     onChange?.(new Map(value).set(keyword.id, keyword));
   }
 
