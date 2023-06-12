@@ -2,6 +2,8 @@ import { Prisma } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "../../../prisma/prisma-client";
 import getAccountFromRequest from "../../utils/api/get-account-from-request";
+import isAuthorMatch from "../../components/products/author-match"; // Import isAuthorMatch
+import removeDiacritics from "../../utils/front-end/remove-diacritics"; // Import removeDiacritics
 
 export type RegisterGrantParams = {
   title: string;
@@ -16,7 +18,6 @@ export type RegisterGrantParams = {
   topic_id: number;
   note: string;
 };
-
 
 export type RegisterGrantRes = Awaited<ReturnType<typeof registerGrant>>;
 
@@ -41,6 +42,15 @@ function registerGrant(params: RegisterGrantParams) {
   });
 }
 
+// Add this function to fetch members
+async function fetchMembers() {
+  return db.member.findMany({
+    include: {
+      account: true,
+    },
+  });
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<RegisterGrantRes | string>
@@ -51,10 +61,8 @@ export default async function handler(
     amount,
     throught_lri,
     status_id,
-
     source_id,
     all_investigator,
-
   } = params;
 
   if (typeof title !== "string") return res.status(400).send("Please provide the title");
@@ -72,6 +80,45 @@ export default async function handler(
       return res.status(401).send("You are not authorized to register a grant");
 
     const newGrant = await registerGrant(params);
+
+    // Get the matched investigators
+    const members = await fetchMembers();
+
+    const investigators = all_investigator.split(/[,;&]/).map((investigator) => investigator.trim());
+    const matchedInvestigators = Array.from(
+      new Set(
+        investigators
+          .map((investigator) => {
+            const foundAccount = members.find((member) =>
+              member &&
+              member.account &&
+              member.account.first_name &&
+              member.account.last_name &&
+              isAuthorMatch(
+                removeDiacritics(investigator),
+                member.account.first_name,
+                member.account.last_name
+              )
+            );
+
+            return foundAccount ? foundAccount.id : null;
+          })
+          .filter((investigatorId) => investigatorId !== null)
+          .map((investigatorId) => investigatorId as number)
+      )
+    );
+
+    // Insert matched investigators into the grant_investigator_member table
+    await Promise.all(
+      matchedInvestigators.map((investigatorId) =>
+        db.grant_investigator_member.create({
+          data: {
+            member_id: investigatorId,
+            grant_id: newGrant.id,
+          },
+        })
+      )
+    );
 
     return res.status(200).send(newGrant);
   } catch (e: any) {

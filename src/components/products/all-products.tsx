@@ -33,7 +33,6 @@ import { ActiveAccountCtx } from "../../services/context/active-account-ctx";
 import type { PublicMemberRes } from "../../pages/api/member/[id]/public";
 import colorFromString from "../../utils/front-end/color-from-string";
 import ProductAllAuthorFilter from "../filters/product-all-author-filter";
-import isAuthorMatch from "./author-match";
 import getMemberAuthor from "../getters/product-member-author-getter";
 
 function getTitle(product: ProductPublicInfo, en: boolean) {
