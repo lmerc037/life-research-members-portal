@@ -23,6 +23,7 @@ import getMemberProduct from "../getters/member-product-author-getter";
 import getMemberOrg from "../getters/member-partner-getter";
 import getMemberSupervision from "../getters/member-supervision-getter";
 import { ActiveAccountCtx } from "../../services/context/active-account-ctx";
+import getMemberGrant from "../getters/member-grant-getter";
 
 const { useBreakpoint } = Grid;
 
@@ -143,6 +144,14 @@ const PublicMemberDescription: FC<Props> = ({ member }) => {
         (localAccount.member?.id === member.id || localAccount.is_admin) && (
           <Item label={en ? "Member's Supervision" : "Supervisions du membre"}>
             {getMemberSupervision(member.supervision_principal_supervisor)}
+          </Item>
+        )}
+
+      {member.grant_investigator_member.length > 0 &&
+        localAccount &&
+        (localAccount.member?.id === member.id || localAccount.is_admin) && (
+          <Item label={en ? "Grant Investigator" : "Subvention"}>
+            {getMemberGrant(member.grant_investigator_member)}
           </Item>
         )}
     </Descriptions>
