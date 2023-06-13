@@ -97,7 +97,7 @@ model event_member_involved {
 model event_next_event {
   event_id                                    Int
   next_event_id                               Int
-  event_event_next_event_event_idToevent      event @relation("event_next_event_event_idToevent", fields: [event_id], references: [id], onUpdate: NoAction, map: "FK_event_next_event_event_id")
+  event_event_next_event_event_idToevent      event @relation("event_next_event_event_idToevent", fields: [event_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FK_event_next_event_event_id")
   event_event_next_event_next_event_idToevent event @relation("event_next_event_next_event_idToevent", fields: [next_event_id], references: [id], onUpdate: NoAction, map: "FK_event_next_event_next_event_id")
 
   @@id([event_id, next_event_id], map: "PK_event_next_event")
@@ -115,7 +115,7 @@ model event_partner_involved {
 model event_previous_event {
   event_id                                            Int
   previous_event_id                                   Int
-  event_event_previous_event_event_idToevent          event @relation("event_previous_event_event_idToevent", fields: [event_id], references: [id], onUpdate: NoAction, map: "FK_event_previous_event_event_id")
+  event_event_previous_event_event_idToevent          event @relation("event_previous_event_event_idToevent", fields: [event_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FK_event_previous_event_event_id")
   event_event_previous_event_previous_event_idToevent event @relation("event_previous_event_previous_event_idToevent", fields: [previous_event_id], references: [id], onUpdate: NoAction, map: "FK_event_previous_event_previous_event_id")
 
   @@id([event_id, previous_event_id], map: "PK_event_previous_event")
@@ -483,7 +483,7 @@ model supervision_co_supervisor {
   member_id      Int
   supervision_id Int
   member         member      @relation(fields: [member_id], references: [id], onUpdate: NoAction, map: "FK_supervision_co_supervisor_member_id")
-  supervision    supervision @relation(fields: [supervision_id], references: [id], onUpdate: NoAction, map: "FK_supervision_co_supervisor_supervision_id")
+  supervision    supervision @relation(fields: [supervision_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FK_supervision_co_supervisor_supervision_id")
 
   @@id([member_id, supervision_id], map: "PK_supervision_co_supervisor")
 }
@@ -492,7 +492,7 @@ model supervision_committee {
   member_id      Int
   supervision_id Int
   member         member      @relation(fields: [member_id], references: [id], onUpdate: NoAction, map: "FK_supervision_committee_member_id")
-  supervision    supervision @relation(fields: [supervision_id], references: [id], onUpdate: NoAction, map: "FK_supervision_committee_supervision_id")
+  supervision    supervision @relation(fields: [supervision_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FK_supervision_committee_supervision_id")
 
   @@id([member_id, supervision_id], map: "PK_supervision_committee")
 }
@@ -501,7 +501,7 @@ model supervision_principal_supervisor {
   member_id      Int
   supervision_id Int
   member         member      @relation(fields: [member_id], references: [id], onUpdate: NoAction, map: "FK_supervision_principal_supervisor_member_id")
-  supervision    supervision @relation(fields: [supervision_id], references: [id], onUpdate: NoAction, map: "FK_supervision_principal_supervisor_supervision_id")
+  supervision    supervision @relation(fields: [supervision_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FK_supervision_principal_supervisor_supervision_id")
 
   @@id([member_id, supervision_id], map: "PK_supervision_principal_supervisor")
 }
@@ -510,7 +510,7 @@ model supervision_trainee {
   member_id      Int
   supervision_id Int
   member         member      @relation(fields: [member_id], references: [id], onUpdate: NoAction, map: "FK_supervision_trainee_member_id")
-  supervision    supervision @relation(fields: [supervision_id], references: [id], onUpdate: NoAction, map: "FK_supervision_trainee_supervision_id")
+  supervision    supervision @relation(fields: [supervision_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FK_supervision_trainee_supervision_id")
 
   @@id([member_id, supervision_id], map: "PK_supervision_trainee")
 }
@@ -518,7 +518,7 @@ model supervision_trainee {
 model sysdiagrams {
   name         String @db.NVarChar(128)
   principal_id Int
-  diagram_id   Int    @id(map: "PK__sysdiagr__C2B05B611EDB903A") @default(autoincrement())
+  diagram_id   Int    @id(map: "PK__sysdiagr__C2B05B6138BE0713") @default(autoincrement())
   version      Int?
   definition   Bytes?
 

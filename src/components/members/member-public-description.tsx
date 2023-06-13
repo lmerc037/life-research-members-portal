@@ -150,7 +150,7 @@ const PublicMemberDescription: FC<Props> = ({ member }) => {
       {member.grant_member_involved.length > 0 &&
         localAccount &&
         (localAccount.member?.id === member.id || localAccount.is_admin) && (
-          <Item label={en ? "Grant Investigator" : "Subvention"}>
+          <Item label={en ? "Grant Involved" : "Subvention impliqué"}>
             {getMemberGrant(member.grant_member_involved)}
           </Item>
         )}
