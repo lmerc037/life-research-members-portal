@@ -108,10 +108,10 @@ export default async function handler(
       )
     );
 
-    // Insert matched investigators into the grant_investigator_member table
+    // Insert matched investigators into the grant_member_involved table
     await Promise.all(
       matchedInvestigators.map((investigatorId) =>
-        db.grant_investigator_member.create({
+        db.grant_member_involved.create({
           data: {
             member_id: investigatorId,
             grant_id: newGrant.id,

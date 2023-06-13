@@ -22,7 +22,7 @@ const _includeAllMemberInfo = {
     has_keyword: { include: { keyword: true } },
     insight: true,
     problem: true,
-    grant_investigator_member: { include: { grant: true } },
+    grant_member_involved: { include: { grant: true } },
     product_member_author: { include: { product: true } },
 } as const;
 
@@ -63,7 +63,7 @@ const _selectPublicMemberInfo = {
     product_member_author: { select: { product: true } },
     partnership_member_org: { include: { organization: true } },
     supervision_principal_supervisor: { select: { supervision: true } },
-    grant_investigator_member: { select: { grant: true } },
+    grant_member_involved: { select: { grant: true } },
 
 } as const;
 

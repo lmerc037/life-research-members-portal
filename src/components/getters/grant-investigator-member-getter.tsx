@@ -9,14 +9,14 @@ import Tag from "antd/lib/tag";
 import colorFromString from "../../utils/front-end/color-from-string";
 
 const getInvestigatorMember = (
-  grant_investigator_member: Array<{
+  grant_member_involved: Array<{
     member: {
       id: number;
       account: { first_name: string; last_name: string };
     };
   }>
 ) => {
-  const memberNames = grant_investigator_member.map((investigator_member) => {
+  const memberNames = grant_member_involved.map((investigator_member) => {
     const name =
       investigator_member.member.account.first_name +
       " " +
