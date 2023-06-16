@@ -89,8 +89,8 @@ const Welcome: FC = () => {
 
       <h4>
         {en
-          ? "If you are a member, please ask an administrator to register you. You can contact the admin at "
-          : "Si vous êtes membre, veuillez demander à un administrateur de vous inscrire. Vous pouvez contacter l'administrateur à "}
+          ? "If you are a member, please ask an administrator to register you by contacting them at "
+          : "Si vous êtes membre, veuillez demander à un administrateur de vous inscrire en les contactant à "}
         <a href="mailto:adm@life@uottawa.ca">adm@life@uottawa.ca</a>.
       </h4>
     </>
