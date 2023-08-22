@@ -14,6 +14,8 @@ import type { EventPrivateInfo } from "../../services/_types";
 import DeleteEventButton from "./delete-event-button";
 import { SaveChangesCtx } from "../../services/context/save-changes-ctx";
 import PublicEventForm from "./event-public-form";
+import SafeLink from "../link/safe-link";
+import PageRoutes from "../../routing/page-routes";
 
 type Tab = { label: string; key: string; children: ReactNode };
 
@@ -29,7 +31,9 @@ const PrivateEventProfile: FC<Props> = ({ id }) => {
   const [editMode, setEditMode] = useState(false);
   const [activeTabKey, setActiveTabKey] = useState(keys.public);
   const { saveChangesPrompt } = useContext(SaveChangesCtx);
-
+  const joeButton = () => {
+    window.open(PageRoutes.joe(id));
+  };
   const onSuccess = useCallback(
     (updatedEvent: EventPrivateInfo) => setEvent(updatedEvent),
     [setEvent]
@@ -92,6 +96,7 @@ const PrivateEventProfile: FC<Props> = ({ id }) => {
       key: keys.public,
       children: <PublicEventDescription event={event} />,
     },
+
     // Add other tab descriptions here
   ];
 
@@ -115,11 +120,16 @@ const PrivateEventProfile: FC<Props> = ({ id }) => {
         onChange={onChange}
         destroyInactiveTabPane
       />
-      <DeleteEventButton
-        event={event}
-        setEvent={setEvent}
-        style={{ marginLeft: "auto", marginTop: "20px", display: "block" }}
-      />
+      <div>
+        <Button size="large" type="primary" onClick={joeButton}>
+          {en ? "Journey of Event" : "Journey of Event"}
+        </Button>
+        <DeleteEventButton
+          event={event}
+          setEvent={setEvent}
+          style={{ marginLeft: "auto", marginTop: "20px", display: "block" }}
+        />
+      </div>
     </Card>
   );
 };

@@ -1,6 +1,10 @@
 const PageRoutes = {
   home: "/",
+
   allMembers: "/members",
+  journeyofevents: "/journey",
+  joe: (id: number) => "/joe/" + id + "/private",
+  report:(id: number) => "/report/" + id + "/private",
   memberProfile: (id: number) => "/members/" + id,
   productProfile: (id: number) => "/products/" + id,
   grantProfile: (id: number) => "/grants/" + id,
