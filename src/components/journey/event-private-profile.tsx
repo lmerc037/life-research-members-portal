@@ -238,10 +238,8 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
     return (
       <div onClick={handleToggle} style={{ cursor: "pointer" }}>
         {expanded ? <MinusOutlined /> : <PlusOutlined />}
-        <strong>
-          <strong>{en ? "Member Involved" : "Membre Impliqué"}</strong>
-        </strong>
-        [{eventMember.length}] :
+        <strong>{en ? "Member Involved" : "Membre Impliqué"}</strong>[
+        {eventMember.length}] :
         {eventMember.length > 0 ? (
           displayedMembers.map((entry: any, index: number) => (
             <React.Fragment key={index}>
