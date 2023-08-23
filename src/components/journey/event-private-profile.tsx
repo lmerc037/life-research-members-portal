@@ -391,7 +391,7 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
         <span onClick={handleToggle} style={{ cursor: "pointer" }}>
           {expanded ? <MinusOutlined /> : <PlusOutlined />}
           <strong>{en ? "Grant" : "Subvention"}</strong>[{eventGrant.length}] :
-          {eventStatus}
+          {eventStatus},{" "}
           {eventGrant.length > 0 ? (
             <span>
               {eventGrant.map((grant: any, index: number) => (
