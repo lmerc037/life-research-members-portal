@@ -95,7 +95,10 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
               )}
             <ExpandablePartner eventId={event.id} />
             <ExpandableGrant eventId={event.id} />
-            <ExpandableProduct eventId={event.id} />
+            {event.event_product_resulted &&
+              event.event_product_resulted.length > 0 && (
+                <ExpandableProduct eventId={event.id} />
+              )}
           </div>
         )}
         {/* Recursive rendering for child events */}
@@ -171,7 +174,10 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
               )}
             <ExpandablePartner eventId={eventData.id} />
             <ExpandableGrant eventId={eventData.id} />
-            <ExpandableProduct eventId={eventData.id} />
+            {eventData.event_product_resulted &&
+              eventData.event_product_resulted.length > 0 && (
+                <ExpandableProduct eventId={eventData.id} />
+              )}
           </div>
         )}
         {/* Recursive rendering for nested events */}
@@ -457,6 +463,7 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
   const ExpandableProduct = ({ eventId }: { eventId: number }) => {
     const [product, setProduct] = useState<any[] | null>(null);
     const [expanded, setExpanded] = useState(false);
+    const [productType, setProductType] = useState<any[] | null>(null);
 
     const handleToggle = () => {
       setExpanded(!expanded);
@@ -474,13 +481,29 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
       }
     }, [eventId]);
 
+    useEffect(() => {
+      if (product && product.length > 0) {
+        // const grantId = eventGrant((grant: any) => grant.id);
+        console.log(product[0].product.product_type_id);
+        // Assuming fetchGrantStatus function takes an array of grantIds
+        fetchProductType(product[0].product.product_type_id)
+          .then((eventDataStatus) => {
+            setProductType(eventDataStatus);
+          })
+          .catch((error) => {
+            console.error("Error fetching grant status:", error);
+          });
+      }
+    }, [product]);
+
     if (!product) return null;
 
     return (
       <div>
         <span onClick={handleToggle} style={{ cursor: "pointer" }}>
           {expanded ? <MinusOutlined /> : <PlusOutlined />}
-          <strong>{en ? "Product" : "Produit"}</strong>[{product.length}] :
+          <strong>{en ? "Product" : "Produit"}</strong>[{product.length}] :{" "}
+          {productType},{" "}
           {product.length > 0 && (
             <span>
               <a
@@ -615,6 +638,28 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
       }
 
       return en ? eventStatus.name_en : eventStatus.name_fr;
+    } catch (error) {
+      console.error("Error fetching event type:", error);
+      throw error;
+    }
+  }
+  async function fetchProductType(productTypeId: number) {
+    try {
+      const response = await fetch("/api/all-product-types"); // Adjust the API endpoint
+      if (!response.ok) {
+        throw new Error("Failed to fetch event type data");
+      }
+
+      const productType = await response.json();
+      const productStatus = productType.find(
+        (event: any) => event.id === productTypeId
+      );
+
+      if (!productStatus) {
+        throw new Error("Event type not found for the provided eventTypeId");
+      }
+
+      return en ? productStatus.name_en : productStatus.name_fr;
     } catch (error) {
       console.error("Error fetching event type:", error);
       throw error;

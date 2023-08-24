@@ -121,9 +121,11 @@ const PrivateEventProfile: FC<Props> = ({ id }) => {
         destroyInactiveTabPane
       />
       <div>
-        <Button size="large" type="primary" onClick={joeButton}>
-          {en ? "Journey of Event" : "Journey of Event"}
-        </Button>
+        {!editMode && (
+          <Button size="large" type="primary" onClick={joeButton}>
+            {en ? "Journey of Event" : "Parcours de l'événement"}
+          </Button>
+        )}
         <DeleteEventButton
           event={event}
           setEvent={setEvent}
