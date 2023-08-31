@@ -83,8 +83,7 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
             {event.start_date
               ? new Date(event.start_date).toISOString().split("T")[0]
               : " "}
-            , [<EventLength eventId={event.id} />
-            ],
+            , [<EventLength eventId={event.id} />]
           </span>
         </div>
         {expandedEventDetails && (
@@ -93,8 +92,14 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
               event.event_member_involved.length > 0 && (
                 <ExpandableMember eventId={event.id} />
               )}
-            <ExpandablePartner eventId={event.id} />
-            <ExpandableGrant eventId={event.id} />
+            {event.event_partner_involved &&
+              event.event_partner_involved.length > 0 && (
+                <ExpandablePartner eventId={event.id} />
+              )}
+            {event.event_grant_resulted &&
+              event.event_grant_resulted.length > 0 && (
+                <ExpandableGrant eventId={event.id} />
+              )}
             {event.event_product_resulted &&
               event.event_product_resulted.length > 0 && (
                 <ExpandableProduct eventId={event.id} />
@@ -172,8 +177,14 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
               eventData.event_member_involved.length > 0 && (
                 <ExpandableMember eventId={eventData.id} />
               )}
-            <ExpandablePartner eventId={eventData.id} />
-            <ExpandableGrant eventId={eventData.id} />
+            {eventData.event_partner_involved &&
+              eventData.event_partner_involved.length > 0 && (
+                <ExpandablePartner eventId={eventData.id} />
+              )}
+            {eventData.event_grant_resulted &&
+              eventData.event_grant_resulted.length > 0 && (
+                <ExpandableGrant eventId={eventData.id} />
+              )}
             {eventData.event_product_resulted &&
               eventData.event_product_resulted.length > 0 && (
                 <ExpandableProduct eventId={eventData.id} />
@@ -244,8 +255,8 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
     return (
       <div onClick={handleToggle} style={{ cursor: "pointer" }}>
         {expanded ? <MinusOutlined /> : <PlusOutlined />}
-        <strong>{en ? "Member Involved" : "Membre Impliqué"}</strong>[
-        {eventMember.length}] :
+        <strong>{en ? "Member Involved" : "Membre Impliqué"}</strong> [
+        {eventMember.length}]:
         {eventMember.length > 0 ? (
           displayedMembers.map((entry: any, index: number) => (
             <React.Fragment key={index}>
@@ -315,8 +326,8 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
     return (
       <div onClick={handleToggle} style={{ cursor: "pointer" }}>
         {expanded ? <MinusOutlined /> : <PlusOutlined />}
-        <strong>{en ? "Event Partner" : "Partenaire de l'Événement"}</strong>[
-        {eventPartner.length}] :
+        <strong>{en ? "Event Partner" : "Partenaire de l'Événement"}</strong> [
+        {eventPartner.length}]:
         {eventPartner.length > 0 ? (
           displayedEventPartner.map((entry: any, index: number) => (
             <React.Fragment key={index}>
@@ -394,7 +405,7 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
       <div>
         <span onClick={handleToggle} style={{ cursor: "pointer" }}>
           {expanded ? <MinusOutlined /> : <PlusOutlined />}
-          <strong>{en ? "Grant" : "Subvention"}</strong>[{eventGrant.length}] :
+          <strong>{en ? "Grant" : "Subvention"}</strong> [{eventGrant.length}]:
           {eventGrant.length > 0 ? (
             <span>
               {eventGrant.map((grant: any, index: number) => (
@@ -483,7 +494,7 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
     useEffect(() => {
       if (product && product.length > 0) {
         // const grantId = eventGrant((grant: any) => grant.id);
-        console.log(product[0].product.product_type_id);
+
         // Assuming fetchGrantStatus function takes an array of grantIds
         fetchProductType(product[0].product.product_type_id)
           .then((eventDataStatus) => {
@@ -501,7 +512,7 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
       <div>
         <span onClick={handleToggle} style={{ cursor: "pointer" }}>
           {expanded ? <MinusOutlined /> : <PlusOutlined />}
-          <strong>{en ? "Product" : "Produit"}</strong>[{product.length}] :{" "}
+          <strong>{en ? "Product" : "Produit"}</strong> [{product.length}]:{" "}
           {productType},{" "}
           {product.length > 0 && (
             <span>
@@ -532,7 +543,7 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
         {expanded && product.length > 1 && (
           <span style={{ marginLeft: "20px" }}>
             {product.slice(1).map((product: any, index: number) => (
-              <span key={index}>
+              <li key={index} style={{ marginLeft: "80px" }}>
                 <a
                   href={PageRoutes.productProfile(product.product.id)}
                   target="_blank"
@@ -540,13 +551,13 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
                   style={{
                     textDecoration: "underline",
                     color: "blue",
-                    marginRight: "5px",
+                    marginRight: "30px",
                   }}
                 >
                   {en ? product.product.title_en : product.product.title_fr}
                 </a>
                 {/* Render other product details as needed */}
-              </span>
+              </li>
             ))}
           </span>
         )}
@@ -642,6 +653,7 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
       throw error;
     }
   }
+
   async function fetchProductType(productTypeId: number) {
     try {
       const response = await fetch("/api/all-product-types"); // Adjust the API endpoint
@@ -670,9 +682,10 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
       <div style={{ marginLeft: "25px" }}>
         <h1>Journey of Event</h1>
         <div>
-          <Button size="large" type="primary" onClick={reportButton}>
+          {/* 
+          <Button size="large" type="primary" onClick={reportButton}> ### Currently I disable this reporting option for future work.
             {en ? "Generate Report" : "Generate Report"}
-          </Button>
+          </Button> */}
         </div>
       </div>
       <ExpandableMainEvent key={event.id} event={event} />
