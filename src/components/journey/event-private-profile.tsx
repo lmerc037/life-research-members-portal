@@ -284,7 +284,7 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
           <span
             style={{ marginLeft: "4px", color: "orange", cursor: "pointer" }}
           >
-            {expanded ? "View less..." : "View more..."}
+            {expanded ? "" : "View more..."}
           </span>
         )}
       </div>
@@ -355,7 +355,7 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
           <span
             style={{ marginLeft: "4px", color: "orange", cursor: "pointer" }}
           >
-            {expanded ? "View less..." : "View more..."}
+            {expanded ? "" : "View more..."}
           </span>
         )}
       </div>
@@ -471,9 +471,8 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
   };
 
   const ExpandableProduct = ({ eventId }: { eventId: number }) => {
-    const [product, setProduct] = useState<any[] | null>(null);
+    const [products, setProducts] = useState<any[] | null>(null);
     const [expanded, setExpanded] = useState(false);
-    const [productType, setProductType] = useState<any[] | null>(null);
 
     const handleToggle = () => {
       setExpanded(!expanded);
@@ -483,7 +482,7 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
       if (eventId !== null) {
         fetchEventId(eventId)
           .then((eventData) => {
-            setProduct(eventData.event_product_resulted);
+            setProducts(eventData.event_product_resulted);
           })
           .catch((error) => {
             console.error("Error fetching event data:", error);
@@ -492,58 +491,43 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
     }, [eventId]);
 
     useEffect(() => {
-      if (product && product.length > 0) {
-        // const grantId = eventGrant((grant: any) => grant.id);
+      if (products && products.length > 0) {
+        const productTypePromises = products.map((product) => {
+          return fetchProductType(product.product.product_type_id);
+        });
 
-        // Assuming fetchGrantStatus function takes an array of grantIds
-        fetchProductType(product[0].product.product_type_id)
-          .then((eventDataStatus) => {
-            setProductType(eventDataStatus);
+        Promise.all(productTypePromises)
+          .then((productTypes) => {
+            const updatedProducts = products.map((product, index) => {
+              return {
+                ...product,
+                productType: productTypes[index], // Assuming this is how you store product type data
+              };
+            });
+            setProducts(updatedProducts);
           })
           .catch((error) => {
-            console.error("Error fetching grant status:", error);
+            console.error("Error fetching product types:", error);
           });
       }
-    }, [product]);
+    }, [products]);
 
-    if (!product) return null;
+    if (!products) return null;
+
+    // Display the first product by default
+    const initialProducts = expanded ? products : [products[0]];
 
     return (
-      <div>
+      <span>
         <span onClick={handleToggle} style={{ cursor: "pointer" }}>
           {expanded ? <MinusOutlined /> : <PlusOutlined />}
-          <strong>{en ? "Product" : "Produit"}</strong> [{product.length}]:{" "}
-          {productType},{" "}
-          {product.length > 0 && (
-            <span>
-              <a
-                href={PageRoutes.productProfile(product[0].product.id)}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  textDecoration: "underline",
-                  color: "blue",
-                  marginRight: "5px",
-                }}
-              >
-                {en ? product[0].product.title_en : product[0].product.title_fr}
-              </a>
-              {/* Render other product details as needed */}
-            </span>
-          )}
+          <strong>{en ? "Product" : "Produit"}</strong> [{products.length}]:
         </span>
-        {product.length > 1 && (
-          <span
-            style={{ marginLeft: "4px", color: "orange", cursor: "pointer" }}
-            onClick={handleToggle}
-          >
-            {expanded ? "" : ""}
-          </span>
-        )}
-        {expanded && product.length > 1 && (
-          <span style={{ marginLeft: "20px" }}>
-            {product.slice(1).map((product: any, index: number) => (
-              <li key={index} style={{ marginLeft: "80px" }}>
+        {initialProducts.map((product: any, index: number) => (
+          <span key={index}>
+            {index === 0 ? ( // Display inline for the first product
+              <span>
+                {product.productType},{" "}
                 <a
                   href={PageRoutes.productProfile(product.product.id)}
                   target="_blank"
@@ -551,20 +535,46 @@ const PrivateJoeProfile: FC<Props> = ({ id }) => {
                   style={{
                     textDecoration: "underline",
                     color: "blue",
-                    marginRight: "30px",
+                    marginRight: "5px",
+                  }}
+                >
+                  {en ? product.product.title_en : product.product.title_fr}
+                </a>
+                {/* Render other product details as needed */}
+              </span>
+            ) : (
+              // Display as a list for other products
+              <li style={{ marginLeft: "80px" }}>
+                {product.productType},{" "}
+                <a
+                  href={PageRoutes.productProfile(product.product.id)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    textDecoration: "underline",
+                    color: "blue",
+                    marginRight: "5px",
                   }}
                 >
                   {en ? product.product.title_en : product.product.title_fr}
                 </a>
                 {/* Render other product details as needed */}
               </li>
-            ))}
+            )}
+          </span>
+        ))}
+        {products.length > 1 && (
+          <span
+            style={{ color: "orange", cursor: "pointer" }}
+            onClick={handleToggle}
+          >
+            {expanded ? "" : "View More..."}
           </span>
         )}
-        {product.length === 0 && (
+        {products.length === 0 && (
           <span>{en ? "No Product Resulted" : "Aucun produit obtenu"}</span>
         )}
-      </div>
+      </span>
     );
   };
 
